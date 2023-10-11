@@ -48,20 +48,24 @@ namespace ImGuiNET.Unity
 
 
 
-        [DllImport("cimgui")]
-        public static extern int AddTest(int a, int b);
+#if (UNITY_IOS && !UNITY_EDITOR) || (UNITY_IPHONE && !UNITY_EDITOR)
+        public const string dllName = "__Internal";
+#else
+        public const string dllName = "cimgui";
+#endif
 
+        //[DllImport(dllName)]
+        //public static extern int AddTest(int a, int b);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void CALLBACKAwakeKeyBoard(string textTile);
 
-
         //为false时可以调用虚拟键盘,逻辑处理完成，置为false。
-        [DllImport("cimgui")]
+        [DllImport(dllName)]
         public static extern void SetKeyBoardAwakeStatus(bool status);
 
         //注册虚拟键盘回调函数
-        [DllImport("cimgui")]
+        [DllImport(dllName)]
         public static extern void AwakeKeyBoard(CALLBACKAwakeKeyBoard cb);
 
         [MonoPInvokeCallback(typeof(CALLBACKAwakeKeyBoard))]
@@ -173,7 +177,7 @@ namespace ImGuiNET.Unity
 
         void Update()
         {
-            Debug.Log("AddTest:" + AddTest(3,6));
+            //Debug.Log("AddTest:" + AddTest(3,6));
             ImGuiUn.SetUnityContext(_context);
             ImGuiIOPtr io = ImGui.GetIO();
 
