@@ -4,6 +4,8 @@ Intermediate
 Saved
 Build
 Library
+Temp
+ImguiTest\obj
 .vscode
 .vs
 *.VC.db
@@ -14,3 +16,4 @@ Library
 *.suo
 *.xcodeproj
 *.xcworkspace
+*.csproj
