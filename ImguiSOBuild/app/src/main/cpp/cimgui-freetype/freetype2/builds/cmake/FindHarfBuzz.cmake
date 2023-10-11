@@ -30,7 +30,8 @@
 # HARFBUZZ_INCLUDE_DIRS - containg the HarfBuzz headers
 # HARFBUZZ_LIBRARIES - containg the HarfBuzz library
 
-include(FindPkgConfig)
+#include(FindPkgConfig)
+find_package(PkgConfig QUIET)
 pkg_check_modules(PC_HARFBUZZ QUIET harfbuzz)
 
 find_path(HARFBUZZ_INCLUDE_DIRS
@@ -60,7 +61,7 @@ endif ()
 
 include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(
-    harfbuzz 
+    HarfBuzz 
         REQUIRED_VARS HARFBUZZ_INCLUDE_DIRS HARFBUZZ_LIBRARIES
         VERSION_VAR HARFBUZZ_VERSION)
 

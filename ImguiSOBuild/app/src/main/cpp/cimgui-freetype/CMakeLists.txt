@@ -10,15 +10,30 @@ set(_imgui_freetype_sources
 source_group(imgui-freetype FILES ${_imgui_freetype_sources})
 
 # define wrapper lib and respective files
-add_library(${PROJECT_NAME} SHARED
-    cimgui_freetype.cpp
-    ${_imgui_freetype_sources}
-)
+#add_library(${PROJECT_NAME} STATIC
+#    cimgui_freetype.cpp
+#    ${_imgui_freetype_sources}
+#)
 
 # link cimgui
+if (APPLE)
+    if (IOS)
+    	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fembed-bitcode")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fembed-bitcode")
+    	ADD_Library(${PROJECT_NAME}  cimgui_freetype.cpp ${_imgui_freetype_sources})
+		set_xcode_property (${PROJECT_NAME} IPHONEOS_DEPLOYMENT_TARGET "7.0" "all")
+    else ()
+		ADD_Library(${PROJECT_NAME}  MODULE cimgui_freetype.cpp ${_imgui_freetype_sources})
+		set_target_properties(${PROJECT_NAME}  PROPERTIES BUNDLE TRUE)
+	endif ()
+else ()
+	add_library(${PROJECT_NAME} SHARED cimgui_freetype.cpp ${_imgui_freetype_sources})
+endif ()
+
+
+
 target_link_libraries(${PROJECT_NAME} PRIVATE cimgui-unity)
 target_include_directories(${PROJECT_NAME} PRIVATE ${_imgui_freetype_path})
-target_include_directories(${PROJECT_NAME} PUBLIC  ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui/imgui)
 
 # freetype module
 # https://cmake.org/cmake/help/latest/module/FindFreetype.html

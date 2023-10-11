@@ -25,10 +25,9 @@
     #define EXTERN extern
 #endif
 
-#if defined __ANDROID__
+#if defined IMGUI_API_IOS || defined __ANDROID__
 #define CIMGUI_API extern "C"
 #endif
-//#define CIMGUI_API EXTERN API
 #define CONST const
 
 

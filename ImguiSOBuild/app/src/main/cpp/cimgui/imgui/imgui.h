@@ -108,7 +108,7 @@ Index of this file:
 #pragma GCC diagnostic ignored "-Wclass-memaccess"          // [__GNUC__ >= 8] warning: 'memset/memcpy' clearing/writing an object of type 'xxxx' with no trivial copy-assignment; use assignment or value-initialization instead
 #endif
 
-#if ANDROID
+#if defined (__ANDROID__)
 #ifndef LOG_TAG
 #define LOG_TAG "ImguiLog"
 #endif
@@ -118,7 +118,7 @@ Index of this file:
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
-#endif
+#endif  //#if defined (__ANDROID__)
 
 //-----------------------------------------------------------------------------
 // Forward declarations and basic types

@@ -7165,7 +7165,7 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
     if (hovered_unblocked && (IsMouseClicked(1) || IsMouseReleased(1)))
         tab_bar->NextSelectedTabId = id;
 
-#if defined __ANDROID__
+#if defined (__ANDROID__) || defined(__APPLE__)
     if (tab_bar->SelectedTabId!=id && hovered_unblocked)
       {
         tab_bar->NextSelectedTabId = id;
