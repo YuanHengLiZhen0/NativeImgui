@@ -31,7 +31,7 @@ MonoBehaviour:
   TouchExtraPadding: {x: 0, y: 0}
   IndentSpacing: 21
   ColumnsMinSpacing: 6
-  ScrollbarSize: 14
+  ScrollbarSize: 30
   ScrollbarRounding: 9
   GrabMinSize: 10
   GrabRounding: 0
