@@ -5,19 +5,25 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+using ImGuiNET;
 
 public class ButtonTest : MonoBehaviour
 {
 
-    private Button _Btn;
+    public Button _BtnTestKeyboard;
+    public Button _BtnShowWindow;
     // Start is called before the first frame update
     static TouchScreenKeyboard keyboard;
     private string lastInput = String.Empty;
+
+    private bool bShowWindow;
     void Start()
     {
        
-        _Btn = GetComponent<Button>();
-        _Btn.onClick.AddListener(ButtonClick);
+        //_Btn = GetComponent<Button>();
+        _BtnTestKeyboard.onClick.AddListener(ButtonTestKeyboardClick);
+        _BtnShowWindow.onClick.AddListener(ButtonShowWindowClick);
+        bShowWindow = false;
     }
 
     // Update is called once per frame
@@ -35,13 +41,32 @@ public class ButtonTest : MonoBehaviour
     }
 
 
+    private void ButtonShowWindowClick()
+    {
+        if (!bShowWindow)
+        {
+            ImGuiUn.Layout += OnLayout;
+        }
+        else
+        {
+            ImGuiUn.Layout -= OnLayout;
+        }
+        bShowWindow = !bShowWindow;
+    }
+
+    void OnLayout()
+    {
+        ImGui.ShowDemoWindow();
+    }
+
+
     // 处理输入
     public void DealInput(string content)
     {
         Debug.Log("content");
     }
 
-    public void  ButtonClick()
+    public void ButtonTestKeyboardClick()
     {
         Debug.Log("button is click");
         keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, false,false,false,false,"",1024);

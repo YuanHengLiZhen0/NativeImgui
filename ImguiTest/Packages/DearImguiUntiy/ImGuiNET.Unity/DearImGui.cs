@@ -131,7 +131,10 @@ namespace ImGuiNET.Unity
                 throw new System.Exception($"Failed to start: {reason}");
             }
 
+
+#if (UNITY_IOS && !UNITY_EDITOR)
             AwakeKeyBoard(CallbackAwakeKeyBoardImpl);
+#endif
         }
 
         void OnDisable()

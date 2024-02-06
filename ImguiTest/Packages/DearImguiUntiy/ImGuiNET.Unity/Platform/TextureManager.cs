@@ -120,12 +120,14 @@ namespace ImGuiNET.Unity
                 var fontConfigPtr = new ImFontConfigPtr(ref fontConfig);
                 fontDefinition.Config.ApplyTo(fontConfigPtr);
                 fontConfigPtr.GlyphRanges = AllocateGlyphRangeArray(fontDefinition.Config);
+                
                 io.Fonts.AddFontFromFileTTF(fontPath, fontDefinition.Config.SizeInPixels, fontConfigPtr);
             }
 
             if (io.Fonts.Fonts.Size == 0)
                 io.Fonts.AddFontDefault();
 
+            io.Fonts.TexDesiredWidth = 2048;
             switch (settings.Rasterizer)
             {
                 case FontRasterizerType.StbTrueType:
@@ -169,7 +171,7 @@ namespace ImGuiNET.Unity
         unsafe Texture2D CreateAtlasTexture(ImFontAtlasPtr atlas)
         {
             atlas.GetTexDataAsRGBA32(out byte* pixels, out int width, out int height, out int bytesPerPixel);
-            var atlasTexture = new Texture2D(width, height, TextureFormat.RGBA32, false, false) { filterMode = FilterMode.Point };
+            var atlasTexture = new Texture2D(width, height, TextureFormat.RGBA32, false, false) { name= "Imgui_AtlasTexture", filterMode = FilterMode.Point };
 
             NativeArray<byte> srcData = NativeArrayUnsafeUtility.ConvertExistingDataToNativeArray<byte>(
                 (void*)pixels, width * height * bytesPerPixel, Allocator.None);

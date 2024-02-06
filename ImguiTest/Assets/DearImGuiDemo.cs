@@ -16,6 +16,6 @@ public class DearImGuiDemo : MonoBehaviour
 
     void OnLayout()
     {
-        ImGui.ShowDemoWindow();
+        //ImGui.ShowDemoWindow();
     }
 }
